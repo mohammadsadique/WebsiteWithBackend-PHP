@@ -2,6 +2,7 @@
 <?php
 if(isset($_POST['sub']))
 {
+	$name = str_replace("'", "\'", htmlspecialchars($_POST['name']));
 	$email = str_replace("'", "\'", htmlspecialchars($_POST['email']));
     $mobile = str_replace("'", "\'", htmlspecialchars($_POST['mobile']));
     $phone = str_replace("'", "\'", htmlspecialchars($_POST['phone']));
@@ -40,14 +41,14 @@ if(isset($_POST['sub']))
 			}
 			else{   
 				move_uploaded_file($_FILES['your_img']['tmp_name'],'../../images/'.$your_imgtt);
-				$bb = "INSERT INTO `tc_contact`( `email`, `mobile`, `phone`, `address`,`logo`, `date_time`, `date`) VALUES ('$email','$mobile','$phone','$address','$your_imgtt','$date_time','$date')";
+				$bb = "INSERT INTO `tc_contact`( `name`,`email`, `mobile`, `phone`, `address`,`logo`, `date_time`, `date`) VALUES ('$name','$email','$mobile','$phone','$address','$your_imgtt','$date_time','$date')";
 				mysqli_query($conn,$bb);
 				
 				echo "<script>alert('Change website details successfully!');</script>";
 				echo "<script>window.location.href='contact.php';</script>";
 			}
 		}else{
-			$bb = "INSERT INTO `tc_contact`( `email`, `mobile`, `phone`, `address`, `date_time`, `date`) VALUES ('$email','$mobile','$phone','$address','$date_time','$date')";
+			$bb = "INSERT INTO `tc_contact`(`name`, `email`, `mobile`, `phone`, `address`, `date_time`, `date`) VALUES ('$name','$email','$mobile','$phone','$address','$date_time','$date')";
 			mysqli_query($conn,$bb);
 			echo "<script>alert('Change website details successfully!');</script>";
 			echo "<script>window.location.href='contact.php';</script>";
@@ -82,6 +83,7 @@ if(isset($_POST['upd'])){
 if(isset($_POST['update']))
 {
 	$id = $_POST['update'];
+	$name = str_replace("'", "\'", htmlspecialchars($_POST['name']));
 	$email = str_replace("'", "\'", htmlspecialchars($_POST['email']));
     $mobile = str_replace("'", "\'", htmlspecialchars($_POST['mobile']));
     $phone = str_replace("'", "\'", htmlspecialchars($_POST['phone']));
@@ -121,14 +123,14 @@ if(isset($_POST['update']))
 			$qq5 = mysqli_fetch_array($ee5);
 			unlink('../../images/'.$qq5['logo']);
 			move_uploaded_file($_FILES['your_img']['tmp_name'],'../../images/'.$your_imgtt);
-			$bb = "UPDATE `tc_contact` SET `email`='$email',`mobile`='$mobile',`phone`='$phone',`address`='$address',`logo`='$your_imgtt',`date_time`='$date_time',`date`='$date' WHERE `id` = '$id'";
+			$bb = "UPDATE `tc_contact` SET `name`='$name',`email`='$email',`mobile`='$mobile',`phone`='$phone',`address`='$address',`logo`='$your_imgtt',`date_time`='$date_time',`date`='$date' WHERE `id` = '$id'";
 			mysqli_query($conn,$bb);
 			
 			echo "<script>alert('Update successfully!');</script>";
 			echo "<script>window.location.href='contact.php';</script>";
 		}
 	}else{
-		$bb = "UPDATE `tc_contact` SET `email`='$email',`mobile`='$mobile',`phone`='$phone',`address`='$address',`date_time`='$date_time',`date`='$date' WHERE `id` = '$id'";
+		$bb = "UPDATE `tc_contact` SET `name`='$name',`email`='$email',`mobile`='$mobile',`phone`='$phone',`address`='$address',`date_time`='$date_time',`date`='$date' WHERE `id` = '$id'";
 		mysqli_query($conn,$bb);
 		echo "<script>alert('Update successfully!');</script>";
 		echo "<script>window.location.href='contact.php';</script>";
@@ -146,6 +148,12 @@ if(isset($_POST['update']))
 					</div>
 					<div class="box-body box box-info">
 						<form method="post" enctype="multipart/form-data">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="email">Name</label>
+									<input type="text" class="form-control" name="name" placeholder="Name" value="<?php if($id != ''){ echo $qq['name']; } ?>" required>
+								</div>  
+							</div>
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="email">Email</label>
@@ -217,6 +225,7 @@ if(isset($_POST['update']))
 							<thead>
 							  <tr>
 								<th>S.No.</th>
+								<th>Name</th>
 								<th>Email</th>
 								<th>Mobile</th>
 								<th>Phone</th>
@@ -235,6 +244,7 @@ if(isset($_POST['update']))
 								?>								
 								<tr>
 									<td>1</td>
+									<td><?php echo $nn1['name'];?></td>
 									<td><?php echo $nn1['email'];?></td>
 									<td><?php echo $nn1['mobile'];?></td>
 									<td><?php echo $nn1['phone'];?></td>

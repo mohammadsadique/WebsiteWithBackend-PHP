@@ -126,7 +126,7 @@ else
 						</a>
 					</li>
 					
-					<li class="<?php if( $b == $c.'/tcsoftware/admin/staff' ){ echo "active"; }?> treeview">
+					<li class="<?php if( $b == $c.'/admin/staff' ){ echo "active"; }?> treeview">
 						<a href="#">	
 							<i class="fa fa-folder"></i> <span>Staff | Customer</span>
 							<span class="pull-right-container">
@@ -217,6 +217,14 @@ else
 					<li <?php if( $a == $b.'/getresume.php' ){ echo "class='active'"; }?>>
 						<a href="../home/getresume.php">
 							<i class="fa fa-file" aria-hidden="true"></i> <span>Apply For Job</span>
+							<span class="pull-right-container">
+								<small class="label pull-right bg-green"></small>
+							</span>
+						</a>
+					</li>
+					<li <?php if( $a == $b.'/officetime.php' ){ echo "class='active'"; }?>>
+						<a href="../home/officetime.php">
+							<i class="fa fa-building-o" aria-hidden="true"></i> <span>Office Timing</span>
 							<span class="pull-right-container">
 								<small class="label pull-right bg-green"></small>
 							</span>

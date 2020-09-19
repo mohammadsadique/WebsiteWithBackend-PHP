@@ -6,6 +6,7 @@
     
 if(isset($_POST['sub'])){   
     $login_id = $_SESSION['id'];
+	$email = str_replace("'", "\'", htmlspecialchars($_POST['email']));
 	$name = str_replace("'", "\'", htmlspecialchars($_POST['name']));
 	$mob1 = str_replace("'", "\'", htmlspecialchars($_POST['mob1']));
     $mob2 = str_replace("'", "\'", htmlspecialchars($_POST['mob2']));
@@ -25,7 +26,7 @@ if(isset($_POST['sub'])){
         $date = date('Y-m-d');
     
     
-        $b = "INSERT INTO `tc_customer`(`login_id`,`name`, `mob1`, `mob2`, `address`, `remark`, `reminder`,  `date_time`, `date`) VALUES ('$login_id','$name','$mob1','$mob2','$address','$remark','$reminder','$date_time','$date')";
+        $b = "INSERT INTO `tc_customer`(`login_id`,`name`, `email`,`mob1`, `mob2`, `address`, `remark`, `reminder`,  `date_time`, `date`) VALUES ('$login_id','$name','$email','$mob1','$mob2','$address','$remark','$reminder','$date_time','$date')";
         mysqli_query($conn,$b);
         echo "<script>alert('Customer added Successfully!');</script>";
         echo "<script>window.location.href='addcustomer.php';</script>";
@@ -46,6 +47,7 @@ if(isset($_POST['upd'])){
 if(isset($_POST['update']))
 {
 	$id = $_POST['update'];
+	$email = str_replace("'", "\'", htmlspecialchars($_POST['email']));
 	$name = str_replace("'", "\'", htmlspecialchars($_POST['name']));
 	$mob1 = str_replace("'", "\'", htmlspecialchars($_POST['mob1']));
     $mob2 = str_replace("'", "\'", htmlspecialchars($_POST['mob2']));
@@ -62,7 +64,7 @@ if(isset($_POST['update']))
 		$date_time = $date->format("M d, Y H:i:s"); 
         $date = date('Y-m-d');
 		
-    $b = "UPDATE `tc_customer` SET `name`='$name',`mob1`='$mob1',`mob2`='$mob2',`address`='$address',`remark`='$remark',`reminder`='$reminder',`date_time`='$date_time',`date`='$date' WHERE `id` = '$id'";
+    $b = "UPDATE `tc_customer` SET `email`='$email',`name`='$name',`mob1`='$mob1',`mob2`='$mob2',`address`='$address',`remark`='$remark',`reminder`='$reminder',`date_time`='$date_time',`date`='$date' WHERE `id` = '$id'";
     mysqli_query($conn,$b);
     echo "<script>alert('Update successfully!');</script>";
     echo "<script>window.location.href='addcustomer.php';</script>";
@@ -82,22 +84,28 @@ if(isset($_POST['update']))
 					</div>
 					<div class="box-body box box-info">
 						<form class="" method="post" enctype="multipart/form-data">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                 <label for="exampleInputEmail1">Name</label>
                                     <input type="text" class="form-control" name="name" placeholder="Name" value="<?php if($id != ''){ echo $qq['name']; } ?>" required>
                                 </div>  
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                <label for="exampleInputEmail1">Email</label>
+                                    <input type="email" class="form-control" name="email" placeholder="Email" value="<?php if($id != ''){ echo $qq['email']; } ?>" >
+                                </div>  
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="mob1">Mobile Number 1</label>
                                     <input type="number" class="form-control" name="mob1" placeholder="Mobile Number 1" value="<?php if($id != ''){ echo $qq['mob1']; } ?>" required>
                                 </div>  
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="mob2">Mobile Number 2</label>
-                                    <input type="number" class="form-control" name="mob2" placeholder="Mobile Number 2" value="<?php if($id != ''){ echo $qq['mob2']; } ?>" required>
+                                    <input type="number" class="form-control" name="mob2" placeholder="Mobile Number 2" value="<?php if($id != ''){ echo $qq['mob2']; } ?>" >
                                 </div>  
                             </div>
                             <div class="col-md-6">

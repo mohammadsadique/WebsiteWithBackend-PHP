@@ -16,7 +16,7 @@
             		<p class="co-name">Next Step Solutions</p>
                     <p>Address : <?php echo $headerPTQ['address']; ?></p>
                 <ul>
-                    <li><span class="number-name" style="font-weight: bold;">Rajendra Prasad Dansena</span></a></li>
+                    <li><span class="number-name" style="font-weight: bold;"><?php echo $headerPTQ['name']; ?></span></a></li>
                     <li><a href="tel:+91-79872 78970"><i class="fa fa-phone"></i> +91-<?php echo $headerPTQ['mobile']; ?> <span class="number-name"></span></a></li>
                     <li><a href="mailto:<?php echo $headerPTQ['email']; ?>"><i class="fa fa-envelope"></i><?php echo $headerPTQ['email']; ?>/a> </li>
                     <li><a href="skype:solversoftware?Chat"><i class="fa fa-skype"></i>TC Software</a></li>
@@ -72,13 +72,14 @@
 <div class="col-md-4 col-xs-12 col-sm-3">
 <h4 class="general-features">Office Timing</h4>
 <ul class="general-features">
-    <li><a href="javascript:void(0)">Monday &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;09:30am to 7:00pm</a></li>
-    <li><a href="javascript:void(0)">Tuesday &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp; 09:30am to 7:00pm</a></li>
-    <li><a href="javascript:void(0)">Wednesday &nbsp;-&nbsp; 09:30am to 7:00pm</a></li>
-    <li><a href="javascript:void(0)">Thursday&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp; 09:30am to 7:00pm</a></li>
-    <li><a href="javascript:void(0)">Friday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;09:30am to 7:00pm</a></li>
-    <li><a href="javascript:void(0)">Saturday &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;09:30am to 7:00pm</a></li>
-    <li><a href="javascript:void(0)">Sunday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Closed</a></li>
+    <?php
+    $vv1 = "SELECT * FROM `tc_officetime`";
+    $tt1 = mysqli_query($conn,$vv1);
+    while($nn1 = mysqli_fetch_array($tt1)){
+        ?>		
+        <li><a href="javascript:void(0)"><?php echo $nn1['tc_news'];?></a></li>
+        <?php
+	}?>
 </ul>
 </div>
 

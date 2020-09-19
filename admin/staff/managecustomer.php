@@ -29,7 +29,13 @@ if(isset($_POST['del'])){
 							<thead>
 							  <tr>
 								<th>S.No.</th>
-								<th>Name</th>
+								<?php
+								if($qq['role'] == 'admin')
+								{
+									echo '<th>Staff Name</th>';
+								}?>
+								<th>Customer Name</th>
+								<th>Customer Email</th>
 								<th>Mobile Number 1</th>
 								<th>Mobile Number 2</th>
 								<th>Address</th>
@@ -45,6 +51,8 @@ if(isset($_POST['del'])){
 								{
 									$vv1 = "SELECT * FROM `tc_customer` ORDER BY id DESC";
 									$tt1 = mysqli_query($conn,$vv1);
+
+									
 								}
 								else
 								{
@@ -53,10 +61,26 @@ if(isset($_POST['del'])){
 								}
 									$i = 1;
 									while($nn1 = mysqli_fetch_array($tt1)){
+										if($qq['role'] == 'admin')
+										{
+											$m = "SELECT * FROM `login` WHERE `id` = '$nn1[login_id]'";
+											$mj = mysqli_query($conn,$m);
+											$pp = mysqli_fetch_array($mj);
+											
+											$checkstaff = mysqli_num_rows($mj);
+										}
 								?>					
 								<tr>
 									<td><?php echo $i; ?></td>
+									<?php
+									if($qq['role'] == 'admin')
+									{
+									    if($checkstaff > 0){
+										echo "<td>".$pp['name']."</td>";
+									    }else{ echo "<td style='color:red'>".'Staff is deleted'."</td>";}
+									}?>
 									<td><?php echo $nn1['name'];?></td>
+									<td><?php echo $nn1['email'];?></td>
 									<td><?php echo $nn1['mob1'];?></td>
 									<td><?php echo $nn1['mob2'];?></td>
 									<td><?php echo $nn1['address'];?></td>

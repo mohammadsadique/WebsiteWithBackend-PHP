@@ -98,6 +98,7 @@
 <li><a href="contact.php">Contact</a></li>
 <li><a href="support.php">Support</a></li>
 <li><a class="career" href="applyforjob.php" target="_blank">APPLY FOR JOB</a></li>
+<li><a href="admin/index.php" target="_blank">Login</a></li>
 
 </ul>
 </div>
