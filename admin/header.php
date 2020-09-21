@@ -1,4 +1,4 @@
-<?php session_start(); include('../dbconnect.php');
+<?php session_start(); include('../dbconnect.php'); require('../customfunction/function.php');
 if(!empty($_SESSION['user_id'])){}
 else
 {

@@ -234,7 +234,16 @@ if(isset($_POST['del'])){
 								<tr>
 									<td><?php echo $i; ?></td>
 									<td><?php echo $nn1['title'];?></td>
-									<td><?php echo $nn1['link'];?></td>
+									<td>
+                                        <?php 
+                                            $string = strip_tags($nn1['link']);
+                                            $charLen = 35;
+                                            $shortLen = shortTextLength($string,$charLen);
+                                       ?>
+                                        <span class="shortlenght"><?php echo $shortLen; ?></span>
+                                        <span class="fulllenght" style="display:none;"><?php echo $string; ?>
+                                        <span class="fulllenclose" style="color:green;cursor: pointer;font-weight: bold;">Close...</span></span>
+                                    </td>
 									<td><?php echo $nn1['description'];?></td>
 									<td>
                                         <?php 
@@ -265,4 +274,16 @@ if(isset($_POST['del'])){
 	</section>
 </div>
 <?php include '../footer.php'; ?>
-	
+<script>
+    $(function(){
+        $(document).on('click','.open',function(e){
+            $(this).parent().css('display','none');
+            $(this).parent().siblings('.fulllenght').css('display','block');
+        });
+        $(document).on('click','.fulllenclose',function(e){
+            $(this).parent().css('display','none');
+            $(this).parent().siblings('.shortlenght').css('display','block');
+        });
+        
+    });
+</script>
